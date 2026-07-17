@@ -1,0 +1,120 @@
+[
+  {
+    "article": {
+      "id": "demo-rede",
+      "title": "Regierung: „Wer unser Paket ablehnt, riskiert den Wohlstand aller\"",
+      "source": "Beispiel-Nachrichten",
+      "url": "https://example.com/demo/rede-reformpaket",
+      "published": "17.07.2026",
+      "region": "DE",
+      "lang": "de",
+      "snippet": "In einer Rede am Donnerstag verteidigte die Ministerin das Reformpaket. „Wer unser Paket ablehnt, riskiert den Wohlstand aller\", sagte sie. Kritiker, die von Alternativen sprächen, verkennten die Lage; das Paket sei „alternativlos\". Zahlen zu den erwarteten Kosten oder zum erwarteten Nutzen nannte sie nicht."
+    },
+    "analysis": {
+      "einordnung": "Der Ausschnitt zeigt eine rhetorische Verengung: Zustimmung wird mit Vernunft, Ablehnung mit Gefährdung gleichgesetzt. Das ist ein Muster systematischer Verengung, kein bloßer Flüchtigkeitsfehler — es kommt aus einer Machtposition und schließt Widerspruch strukturell aus.",
+      "befunde": [
+        {
+          "art": "fehlschluss",
+          "beschreibung": "Der Text stellt nur zwei Möglichkeiten dar — Zustimmung oder Gefährdung des Wohlstands. Die Möglichkeit einer anderen, ebenfalls verantwortungsvollen Position wird durch die Wortwahl ausgeschlossen (falsches Dilemma).",
+          "beleg": "„Wer unser Paket ablehnt, riskiert den Wohlstand aller\" … das Paket sei „alternativlos\".",
+          "konfidenz": 0.72,
+          "schwere": "hoch"
+        },
+        {
+          "art": "suggestivsprache",
+          "beschreibung": "Kritiker werden nicht mit Argumenten, sondern mit einem Wahrnehmungsdefizit belegt. Das wertet die Gegenseite ab, ohne ihre Punkte zu nennen.",
+          "beleg": "Kritiker, die von Alternativen sprächen, verkennten die Lage",
+          "konfidenz": 0.55,
+          "schwere": "mittel"
+        },
+        {
+          "art": "unbelegte_behauptung",
+          "beschreibung": "Ein umfassender Nutzen („Wohlstand aller\") wird behauptet, während im Ausschnitt keinerlei Zahlen zu Kosten oder Nutzen erscheinen.",
+          "beleg": "Zahlen zu den erwarteten Kosten oder zum erwarteten Nutzen nannte sie nicht.",
+          "konfidenz": 0.6,
+          "schwere": "mittel"
+        }
+      ],
+      "blinde_flecken": [
+        "Es liegt nur ein kurzer Auszug vor; im vollständigen Redetext könnten Zahlen und Alternativen genannt worden sein.",
+        "Ob „alternativlos\" wörtlich fiel oder eine Zusammenfassung der Redaktion ist, lässt sich aus dem Ausschnitt nicht sicher sagen."
+      ],
+      "cassius_kommentar": "„Alternativlos\" ist das Lieblingswort derer, die keine Lust auf Widerspruch haben. Ein Paket, das den Wohlstand aller rettet, aber keine einzige Zahl verträgt — da zappelt jemand im eigenen Netz. Nicht die Ministerin ist das Problem, sondern der Satz, der jede Frage zur Illoyalität erklärt.",
+      "gesamt_konfidenz": 0.6
+    },
+    "model": "fixture",
+    "generated_at": "2026-07-17T09:00:00+00:00",
+    "mock": true
+  },
+  {
+    "article": {
+      "id": "demo-studie",
+      "title": "Studie: Neues Getränk soll Konzentration „deutlich steigern\"",
+      "source": "Gesundheit heute",
+      "url": "https://example.com/demo/getraenk-studie",
+      "published": "17.07.2026",
+      "region": "INT",
+      "lang": "de",
+      "snippet": "Ein neues Getränk verspreche eine deutlich gesteigerte Konzentration, berichtet der Hersteller. „Nutzer fühlen sich wacher\", heißt es. Eine Studie mit 20 Teilnehmern habe positive Effekte gezeigt. Details zur Methode oder eine Kontrollgruppe werden nicht genannt. Experten sind sich uneinig."
+    },
+    "analysis": {
+      "einordnung": "Ein typischer Fall menschlicher Schwäche, nicht der Perfidie: Eine Herstellerangabe wird als Erkenntnis präsentiert. Kein Kalkül erkennbar — eher der alte Reflex, eine Pressemitteilung für eine Studie zu halten.",
+      "befunde": [
+        {
+          "art": "unbelegte_behauptung",
+          "beschreibung": "Eine subjektive Wirkung wird als Beleg angeführt, obwohl sie aus der Selbstauskunft des Herstellers stammt.",
+          "beleg": "„Nutzer fühlen sich wacher\", heißt es.",
+          "konfidenz": 0.6,
+          "schwere": "mittel"
+        },
+        {
+          "art": "fehlender_kontext",
+          "beschreibung": "Zur Bewertung einer Studie fehlen Stichprobengröße im Verhältnis, Methode und Kontrollgruppe. Der Text nennt eine kleine Zahl und räumt das Fehlen der Details selbst ein.",
+          "beleg": "Eine Studie mit 20 Teilnehmern … Details zur Methode oder eine Kontrollgruppe werden nicht genannt.",
+          "konfidenz": 0.7,
+          "schwere": "mittel"
+        },
+        {
+          "art": "false_balance",
+          "beschreibung": "„Experten sind sich uneinig\" kann echte Uneinigkeit abbilden — oder eine künstliche Waage zwischen einer belegten und einer unbelegten Seite. Aus dem Ausschnitt nicht entscheidbar; deshalb niedrige Konfidenz.",
+          "beleg": "Experten sind sich uneinig.",
+          "konfidenz": 0.4,
+          "schwere": "niedrig"
+        }
+      ],
+      "blinde_flecken": [
+        "Ohne die Originalstudie lässt sich die Aussagekraft nicht prüfen.",
+        "Der Ausschnitt zeigt keine der Expertenpositionen — „uneinig\" könnte zutreffen."
+      ],
+      "cassius_kommentar": "Zwanzig Menschen, keine Kontrollgruppe, ein Hersteller, der sich selbst zitiert — und schon fühlt sich die halbe Redaktion wacher. Das ist keine Bosheit, nur die alte Schwäche, eine Pressemitteilung für eine Erkenntnis zu halten. Frag nach der Methode, bevor du an das Wunder glaubst.",
+      "gesamt_konfidenz": 0.55
+    },
+    "model": "fixture",
+    "generated_at": "2026-07-17T09:00:00+00:00",
+    "mock": true
+  },
+  {
+    "article": {
+      "id": "demo-radweg",
+      "title": "Stadtrat beschließt neuen Radweg entlang der Uferstraße",
+      "source": "Lokalanzeiger",
+      "url": "https://example.com/demo/radweg-uferstrasse",
+      "published": "16.07.2026",
+      "region": "DE",
+      "lang": "de",
+      "snippet": "Der Stadtrat hat am Dienstag mehrheitlich den Bau eines Radwegs entlang der Uferstraße beschlossen. Der Beschluss fiel mit 24 zu 11 Stimmen. Die Kosten werden mit 1,2 Millionen Euro angegeben. Baubeginn soll im Frühjahr sein. Gegenstimmen kamen aus zwei Fraktionen, die auf wegfallende Parkplätze verwiesen."
+    },
+    "analysis": {
+      "einordnung": "Ein sauberer Bericht. Zahlen, Abstimmungsergebnis und die Gegenposition mit Begründung stehen im Text. Es wird nichts behauptet, was nicht gezeigt wird. Kein Befund — und das ist ein gutes Ergebnis, kein Versäumnis.",
+      "befunde": [],
+      "blinde_flecken": [
+        "Nur ein Auszug; ob die Gegenargumente im Volltext vollständig eingeordnet sind, lässt sich nicht abschließend sagen."
+      ],
+      "cassius_kommentar": "Zahlen, Abstimmungsergebnis, benannte Gegenstimmen mit Begründung. Ein Text, der nichts behauptet, was er nicht zeigt. Nicht jedes Netz fängt etwas — und das ist die beste Nachricht, die ich heute habe.",
+      "gesamt_konfidenz": 0.8
+    },
+    "model": "fixture",
+    "generated_at": "2026-07-17T09:00:00+00:00",
+    "mock": true
+  }
+]

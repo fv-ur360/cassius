@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}{{ a.article.title }}{% endblock %}
+{% block description %}KI-Analyse (Cassius): Argumentstruktur von „{{ a.article.title }}". Fiktive Kunstfigur, kein journalistisches Urteil.{% endblock %}
+
+{% block content %}
+<article class="analysis">
+  <p class="crumb"><a href="{{ root }}index.html">← Alle Analysen</a></p>
+
+  <header class="analysis-head">
+    <div class="card-meta">
+      <span class="badge source">{{ a.article.source }}</span>
+      <span class="badge region">{{ a.article.region }}</span>
+      {% if a.mock %}<span class="badge mock">Demo</span>{% endif %}
+    </div>
+    <h1>{{ a.article.title }}</h1>
+    <p class="orig">
+      Originalquelle:
+      <a href="{{ a.article.url }}" rel="nofollow noopener" target="_blank">{{ a.article.url }}</a>
+      {% if a.article.published %}· {{ a.article.published }}{% endif %}
+    </p>
+  </header>
+
+  {% if a.article.snippet %}
+  <section class="excerpt">
+    <h2>Zitierter Auszug</h2>
+    <blockquote>{{ a.article.snippet }}</blockquote>
+    <p class="fine">Kurzer Auszug im Rahmen des Zitatrechts. Der vollständige Text steht bei der Originalquelle.</p>
+  </section>
+  {% endif %}
+
+  <section class="cassius">
+    <h2><span class="spider" aria-hidden="true">🕷️</span> Cassius' Kommentar</h2>
+    <p class="commentary">{{ a.analysis.cassius_kommentar }}</p>
+  </section>
+
+  <section class="verdict">
+    <h2>Einordnung</h2>
+    <p>{{ a.analysis.einordnung }}</p>
+    <p class="confidence-line">
+      Gesamt-Konfidenz dieser Analyse:
+      <strong>{{ a.analysis.gesamt_konfidenz | pct }}%</strong>
+    </p>
+  </section>
+
+  <section class="findings">
+    <h2>Befunde</h2>
+    {% if not a.analysis.befunde %}
+      <p class="clean-note">Kein Befund. Ein sauberer Text ist ein gutes Ergebnis — nicht jedes Netz fängt etwas.</p>
+    {% else %}
+      <ul class="finding-list">
+        {% for f in a.analysis.befunde %}
+        <li class="finding sev-{{ f.schwere }}">
+          <div class="finding-head">
+            <span class="finding-type">{{ f.art | replace("_", " ") }}</span>
+            <span class="finding-sev">Schwere: {{ f.schwere }}</span>
+            <span class="finding-conf">Konfidenz {{ f.konfidenz | pct }}%</span>
+          </div>
+          <p class="finding-desc">{{ f.beschreibung }}</p>
+          <blockquote class="finding-evidence">{{ f.beleg }}</blockquote>
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+
+  <section class="blindspots">
+    <h2>Blinde Flecken</h2>
+    <p class="fine">Was Cassius an diesem Text <em>nicht</em> beurteilen kann:</p>
+    {% if a.analysis.blinde_flecken %}
+      <ul>
+        {% for b in a.analysis.blinde_flecken %}
+        <li>{{ b }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Keine ausgewiesen.</p>
+    {% endif %}
+  </section>
+
+  <footer class="provenance">
+    <p class="fine">
+      KI-generiert mit <code>{{ a.model }}</code> · {{ a.generated_at }}
+      {% if a.mock %} · <strong>Demo-/Fixture-Daten (keine echte KI-Ausgabe)</strong>{% endif %}
+    </p>
+  </footer>
+</article>
+{% endblock %}

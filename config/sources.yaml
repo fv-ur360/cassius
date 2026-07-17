@@ -1,0 +1,41 @@
+# Cassius — Quellen- und Laufkonfiguration
+#
+# Nur öffentliche, offizielle Feeds. Respektiere die Nutzungsbedingungen der Quellen.
+# Cassius liest kurz, zitiert kurz und verlinkt immer auf das Original.
+
+site:
+  title: "Cassius"
+  tagline: "Die Spinne im Netz der Nachrichten"
+  language: de            # Sprache der generierten Ausgabe (Persona antwortet entsprechend)
+  base_url: ""            # z. B. "https://cassius.example" — für absolute Links/JSON-LD
+
+model:
+  # Standard laut Projektvorgabe: das stärkste Modell für saubere Persona-Treue.
+  # Für Kostenoptimierung bei vielen Artikeln: "claude-sonnet-5" eintragen.
+  id: "claude-opus-4-8"
+  effort: "high"          # low | medium | high | xhigh | max
+
+run:
+  max_articles_per_feed: 5   # wie viele Einträge je Feed maximal analysiert werden
+  max_articles_total: 20     # harte Obergrenze pro Lauf (Kosten-/Zeitschutz)
+
+# Feeds: name (Anzeige), url (RSS/Atom), region, lang.
+# Beispielhaft internationale, öffentliche Feeds. Passe sie an deine Bedürfnisse an
+# und prüfe jeweils die Nutzungsbedingungen.
+feeds:
+  - name: "tagesschau"
+    url: "https://www.tagesschau.de/index~rss2.xml"
+    region: "DE"
+    lang: "de"
+  - name: "Deutsche Welle"
+    url: "https://rss.dw.com/rdf/rss-de-all"
+    region: "DE"
+    lang: "de"
+  - name: "BBC News (World)"
+    url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+    region: "INT"
+    lang: "en"
+  - name: "Reuters (via Google News)"
+    url: "https://news.google.com/rss/search?q=when:24h+source:reuters&hl=en"
+    region: "INT"
+    lang: "en"

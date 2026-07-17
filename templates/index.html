@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Analysen{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Das Netz sieht, was der Text verschweigt.</h1>
+  <p class="lede">
+    Cassius durchsucht öffentliche Nachrichten nach <em>Framing</em>,
+    <em>logischen Fehlschlüssen</em> und <em>rhetorischer Manipulation</em> — und
+    weist seine eigene Fehlbarkeit offen aus. Jeder Befund trägt einen Beleg und
+    einen Konfidenzwert. Wo die Datenlage dünn ist, urteilt er nicht.
+  </p>
+</section>
+
+{% if not articles %}
+  <p class="empty">Noch keine Analysen. Führe einen Lauf aus: <code>python -m cassius run --mock</code></p>
+{% endif %}
+
+<ul class="card-list">
+  {% for a in articles %}
+  <li class="card">
+    <div class="card-meta">
+      <span class="badge source">{{ a.article.source }}</span>
+      <span class="badge region">{{ a.article.region }}</span>
+      {% if a.mock %}<span class="badge mock">Demo</span>{% endif %}
+    </div>
+    <h2 class="card-title">
+      <a href="artikel/{{ a.article.id }}.html">{{ a.article.title }}</a>
+    </h2>
+    <p class="card-comment">{{ a.analysis.cassius_kommentar }}</p>
+    <div class="card-footer">
+      {% if a.analysis.befunde %}
+        <span class="findings-count">{{ a.analysis.befunde | length }} Befund(e)</span>
+      {% else %}
+        <span class="findings-count clean">sauber — kein Befund</span>
+      {% endif %}
+      <span class="confidence" title="Gesamt-Konfidenz der Analyse">
+        Konfidenz {{ a.analysis.gesamt_konfidenz | pct }}%
+      </span>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

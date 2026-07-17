@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ cfg.site_title }}{% endblock %} · {{ cfg.site_title }}</title>
+
+  {# --- EU AI Act, Art. 50 Abs. 2: maschinenlesbare Markierung synthetischer Inhalte --- #}
+  <meta name="ai-generated" content="true">
+  <meta name="ai-generator" content="Cassius AI">
+  <meta name="generator" content="Cassius AI (KI-generierte Analyse)">
+  <meta name="description" content="{% block description %}KI-generierte Analyse von Nachrichtentexten auf Framing und Fehlschlüsse. Fiktive Kunstfigur. Kein journalistisches Urteil.{% endblock %}">
+
+  <link rel="stylesheet" href="{{ root }}static/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": {{ self.title() | trim | tojson }},
+    "creator": {"@type": "SoftwareApplication", "name": "Cassius AI", "applicationCategory": "MediaAnalysis"},
+    "isBasedOn": "AI-generated analysis of public news arguments",
+    "disambiguatingDescription": "KI-generierte Analyse einer fiktiven Kunstfigur (Cassius). Kein journalistisches Urteil und keine Tatsachenbehauptung über die Absichten benannter Personen.",
+    "abstract": "AI-generated text · fictional persona · not a factual claim"
+  }
+  </script>
+</head>
+<body>
+  {# --- EU AI Act, Art. 50 Abs. 4: sichtbare Kennzeichnung KI-erzeugter Texte --- #}
+  <div class="ai-disclosure" role="note">
+    <strong>🤖 KI-generiert.</strong>
+    Fiktive Kunstfigur „Cassius". Analyse von <em>Argumentstrukturen</em> — kein
+    journalistisches Urteil, keine Aussage über die Absichten benannter Personen.
+    {% if any_mock %}<span class="mock-flag">· Demo-Daten (Mock-Modus)</span>{% endif %}
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="{{ root }}index.html">
+      <span class="spider" aria-hidden="true">🕷️</span>
+      <span class="brand-text">
+        <span class="brand-name">{{ cfg.site_title }}</span>
+        <span class="brand-tag">{{ cfg.tagline }}</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="{{ root }}index.html">Analysen</a>
+      <a href="{{ root }}methodology.html">Methodik</a>
+      <a href="{{ root }}about.html">Über Cassius</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Cassius</strong> ist eine fiktive Kunstfigur. Die Analysen werden von
+      einem KI-Sprachmodell erzeugt und sind fehlbar — jeder Befund trägt einen
+      Konfidenzwert, jede Analyse ausgewiesene blinde Flecken.
+    </p>
+    <p class="fine">
+      Kennzeichnung gemäß Art. 50 der EU-KI-Verordnung. Es werden nur öffentliche
+      Feed-Auszüge zitiert; es wird stets auf das Original verlinkt.
+      Siehe <a href="{{ root }}methodology.html">Methodik</a> und
+      <a href="{{ root }}about.html">Über Cassius</a>.
+    </p>
+  </footer>
+</body>
+</html>

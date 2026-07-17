@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Methodik{% endblock %}
+
+{% block content %}
+<article class="prose">
+  <h1>Methodik & Grenzen</h1>
+
+  <p class="lede">
+    Ehrlichkeit über die eigene Fehlbarkeit ist bei Cassius keine Pose, sondern die
+    Qualitätssicherung. Hier steht, wie die Analyse entsteht — und was sie nicht kann.
+  </p>
+
+  <h2>Die Pipeline</h2>
+  <ol>
+    <li><strong>Einlesen.</strong> Öffentliche Nachrichten über offizielle RSS-/News-Feeds.
+      Nur kurze Auszüge (Zitatrecht), immer mit Link auf das Original.</li>
+    <li><strong>Analysieren.</strong> Ein KI-Sprachmodell prüft jeden Text mit der
+      Cassius-Persona auf Fehlschlüsse, Framing, Suggestivsprache, fehlenden Kontext,
+      unbelegte Behauptungen und false balance.</li>
+    <li><strong>Prüfen (Red-Team).</strong> Vor jedem Befund versucht das Modell, den
+      Befund selbst zu widerlegen. Nur was diese Prüfung übersteht, wird ausgegeben.</li>
+    <li><strong>Veröffentlichen.</strong> Als statische Seite mit Konfidenzwerten,
+      Belegen und ausgewiesenen blinden Flecken.</li>
+  </ol>
+
+  <h2>Was die Analyse ist</h2>
+  <ul>
+    <li>Eine Untersuchung der <strong>Argumentstruktur eines Textes</strong> —
+      mit Beleg-Zitat und Konfidenz je Befund.</li>
+    <li>Ein Anstoß, <strong>Fragen zu stellen</strong>, nicht ein Urteil.</li>
+  </ul>
+
+  <h2>Was die Analyse nicht ist</h2>
+  <ul>
+    <li><strong>Kein Wahrheitsschiedsspruch.</strong> Ein Sprachmodell übertreibt bei
+      „Fehlschluss-Erkennung" und übersieht echte Fehler. „Framing" ist teils subjektiv —
+      deshalb die Konfidenzwerte.</li>
+    <li><strong>Keine Aussage über Personen.</strong> Analysiert wird der Text, nicht die
+      Absicht eines benannten Menschen.</li>
+    <li><strong>Kein Vollbild.</strong> Meist liegt nur ein Auszug vor. Was fehlt, steht
+      unter „blinde Flecken".</li>
+  </ul>
+
+  <h2>EU-AI-Act-Kennzeichnung</h2>
+  <ul>
+    <li><strong>Sichtbar</strong> (Art. 50 Abs. 4): Banner auf jeder Seite.</li>
+    <li><strong>Maschinenlesbar</strong> (Art. 50 Abs. 2): Meta-Tags
+      (<code>ai-generated</code>) und JSON-LD auf jeder Seite.</li>
+    <li><strong>Provenienz:</strong> Jede Analyse nennt Modell und Zeitpunkt der Erzeugung.</li>
+  </ul>
+
+  <h2>Roadmap</h2>
+  <ul>
+    <li>Vergleichende Analyse (Triangulation): wie berichten mehrere Quellen über dasselbe Ereignis?</li>
+    <li>Separater adversarialer Prüf-Durchlauf (statt in-prompt) mit Mehrheitsvotum.</li>
+    <li>C2PA-/Content-Credentials-Markierung an der HTML-Ausgabe.</li>
+    <li>Optionaler menschlicher Review-Schritt vor Veröffentlichung.</li>
+  </ul>
+</article>
+{% endblock %}

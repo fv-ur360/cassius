@@ -1,0 +1,13 @@
+# Generierte Website
+/site/
+
+# Zwischenergebnisse der Pipeline (Analysen als JSON)
+/data/runs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.env
