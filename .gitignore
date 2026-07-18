@@ -1,8 +1,10 @@
 # Generierte Website
 /site/
 
-# Zwischenergebnisse der Pipeline (Analysen als JSON)
+# Zwischenergebnisse und Gedächtnis der Pipeline (können reale Analysen über
+# benannte Personen enthalten — dürfen NICHT ins öffentliche Repo).
 /data/runs/
+/data/state/
 
 # Python
 __pycache__/

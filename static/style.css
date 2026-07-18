@@ -199,6 +199,28 @@ code {
   font-size: 0.86rem;
 }
 
+/* --- Privat-Banner --- */
+.private-banner {
+  background: var(--bg-soft);
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 0.45rem 1rem;
+}
+.private-banner strong { color: var(--text); }
+
+/* --- „Gelernt"-Seite --- */
+.cat-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+.cat-list li { display: flex; justify-content: space-between; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.7rem; }
+.cat-name { text-transform: capitalize; }
+.cat-count { color: var(--muted); }
+.src-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.src-table th, .src-table td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); }
+.src-table th { color: var(--muted); font-weight: 600; }
+.src-table td:nth-child(3) { color: var(--muted); text-transform: capitalize; }
+
 @media (max-width: 480px) {
   .site-header { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .src-table { font-size: 0.82rem; }
 }

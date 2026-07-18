@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Gelernt{% endblock %}
+
+{% block content %}
+<article class="prose">
+  <h1>Was Cassius gelernt hat</h1>
+
+  <p class="lede">
+    Das Gedächtnis ist bewusst begrenzt: Cassius merkt sich <em>Beobachtungen</em>
+    (welche Quelle neigt wozu, wie oft ein Text sauber ist) — aber niemals neue Regeln.
+    Diese Muster fließen als <strong>Kontext</strong> in künftige Analysen zurück, nie als
+    Urteil. Jeder Text wird neu an seinen eigenen Belegen gemessen.
+  </p>
+
+  {% if not stats or stats.total == 0 %}
+    <p class="empty">Noch nichts gelernt. Nach den ersten Läufen erscheinen hier die Muster.</p>
+  {% else %}
+    <section>
+      <h2>Überblick</h2>
+      <ul>
+        <li><strong>{{ stats.total }}</strong> Analysen insgesamt</li>
+        <li><strong>{{ stats.clean }}</strong> davon ohne Befund
+          ({{ stats.clean_rate }}% — ein sauberer Text ist ein gutes Ergebnis)</li>
+      </ul>
+    </section>
+
+    {% if stats.categories %}
+    <section>
+      <h2>Häufigste Befund-Arten</h2>
+      <ul class="cat-list">
+        {% for cat, n in stats.categories.items() %}
+        <li><span class="cat-name">{{ cat | replace("_", " ") }}</span>
+          <span class="cat-count">{{ n }}×</span></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if stats.by_source %}
+    <section>
+      <h2>Nach Quelle</h2>
+      <table class="src-table">
+        <thead><tr><th>Quelle</th><th>Analysen</th><th>Häufigste Befunde</th></tr></thead>
+        <tbody>
+          {% for src, entry in stats.by_source.items() %}
+          <tr>
+            <td>{{ src }}</td>
+            <td>{{ entry.count }}</td>
+            <td>
+              {% if entry.categories %}
+                {% for cat, n in entry.categories.items() %}{{ cat | replace("_", " ") }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}
+              {% else %}bisher unauffällig{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="fine">
+        Achtung — und das ist Cassius' eigenes Prinzip: Diese Tendenzen sind
+        <em>Beobachtung, keine Erwartung</em>. Sie dürfen nie dazu führen, dass ein Befund
+        entsteht, den der konkrete Text nicht hergibt.
+      </p>
+    </section>
+    {% endif %}
+  {% endif %}
+</article>
+{% endblock %}

@@ -25,7 +25,12 @@ def _severity_weight(a: AnalyzedArticle) -> tuple[int, int]:
     return (top, len(a.analysis.befunde))
 
 
-def build_site(cfg: Config, analyzed: list[AnalyzedArticle], out_dir: str | Path = "site") -> Path:
+def build_site(
+    cfg: Config,
+    analyzed: list[AnalyzedArticle],
+    stats: dict | None = None,
+    out_dir: str | Path = "site",
+) -> Path:
     out = Path(out_dir)
     (out / "static").mkdir(parents=True, exist_ok=True)
     (out / "artikel").mkdir(parents=True, exist_ok=True)
@@ -65,6 +70,12 @@ def build_site(cfg: Config, analyzed: list[AnalyzedArticle], out_dir: str | Path
             env.get_template(page).render(root="", **base_ctx),
             encoding="utf-8",
         )
+
+    # „Gelernt"-Seite (Transparenz über das Gedächtnis)
+    (out / "learned.html").write_text(
+        env.get_template("learned.html").render(root="", stats=stats or {}, **base_ctx),
+        encoding="utf-8",
+    )
 
     # CSS kopieren
     css = STATIC_DIR / "style.css"

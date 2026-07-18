@@ -19,6 +19,27 @@ run:
   max_articles_per_feed: 5   # wie viele Einträge je Feed maximal analysiert werden
   max_articles_total: 20     # harte Obergrenze pro Lauf (Kosten-/Zeitschutz)
 
+# Zugang: entscheidet über Rechtsstellung UND Verhalten des Compliance-Gates.
+#   private = Solo-Werkzeug, nur mit Passwort, kein Dritter → Gate durchlässig.
+#   public  = veröffentlicht → Gate scharf (braucht Impressum + V.i.S.d.P.!).
+access:
+  mode: private
+  user: cassius              # Basic-Auth-Nutzername für `serve`
+  password_env: CASSIUS_PASSWORD   # das Passwort kommt aus dieser Umgebungsvariablen
+
+# Vollautomatik (`auto`)
+automation:
+  interval_seconds: 3600     # Sekunden zwischen den Läufen
+
+# Autodidaktisches Gedächtnis
+learning:
+  enabled: true              # sammelt Muster und gibt sie als Kontext zurück (nie als Regel)
+
+# Compliance-Gate — nur im Public-Modus wirksam (der spätere Schalter)
+gate:
+  min_confidence: 0.4        # Analysen unter dieser Gesamt-Konfidenz werden zurückgehalten
+  denylist: []               # Begriffe/Namen, die nie veröffentlicht werden (z. B. Privatpersonen)
+
 # Feeds: name (Anzeige), url (RSS/Atom), region, lang.
 # Beispielhaft internationale, öffentliche Feeds. Passe sie an deine Bedürfnisse an
 # und prüfe jeweils die Nutzungsbedingungen.

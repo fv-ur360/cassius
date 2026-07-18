@@ -34,6 +34,12 @@
     {% if any_mock %}<span class="mock-flag">· Demo-Daten (Mock-Modus)</span>{% endif %}
   </div>
 
+  {% if cfg.access == "private" %}
+  <div class="private-banner" role="note">
+    🔒 <strong>Privater Testbetrieb.</strong> Nur mit Passwort erreichbar, nicht veröffentlicht — kein Publikum, kein Dritter.
+  </div>
+  {% endif %}
+
   <header class="site-header">
     <a class="brand" href="{{ root }}index.html">
       <span class="spider" aria-hidden="true">🕷️</span>
@@ -44,6 +50,7 @@
     </a>
     <nav class="site-nav">
       <a href="{{ root }}index.html">Analysen</a>
+      <a href="{{ root }}learned.html">Gelernt</a>
       <a href="{{ root }}methodology.html">Methodik</a>
       <a href="{{ root }}about.html">Über Cassius</a>
     </nav>

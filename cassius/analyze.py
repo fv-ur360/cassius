@@ -80,9 +80,20 @@ class Analyzer:
             self._client = anthropic.Anthropic()
         return self._client
 
-    def analyze(self, article: Article) -> AnalyzedArticle:
+    def analyze(self, article: Article, memory_brief: str = "") -> AnalyzedArticle:
         client = self._client_lazy()
-        user_content = f"{self.analysis_prompt}\n\n---\n\n{_article_block(article)}"
+
+        memory_block = ""
+        if memory_brief.strip():
+            memory_block = (
+                "GEDÄCHTNIS (nur Kontext, KEIN Urteil): Das Folgende sind bisherige "
+                "Beobachtungen. Behandle sie als Erwartung, die es zu misstrauen gilt — "
+                "lass sie niemals einen Befund erzeugen, den der konkrete Text nicht hergibt. "
+                "Prüfe diesen Text neu an seinen eigenen Belegen.\n"
+                f"{memory_brief.strip()}\n\n---\n\n"
+            )
+
+        user_content = f"{self.analysis_prompt}\n\n---\n\n{memory_block}{_article_block(article)}"
 
         response = client.messages.create(
             model=self.cfg.model_id,

@@ -57,6 +57,15 @@ Tatsachenbehauptungen und kein Urteil über die Absichten benannter Menschen.
 
 ---
 
+## Betriebsmodus: privates Solo-Werkzeug (Standard)
+
+Cassius läuft standardmäßig als **privates Werkzeug** (`access.mode: private` in
+`config/sources.yaml`): nur mit Passwort erreichbar, nur an `127.0.0.1` gebunden,
+**kein Publikum, kein Dritter**. In diesem Modus analysiert er für *dich* — ohne die
+Pflichten (Impressum, V.i.S.d.P.), die erst greifen, sobald etwas öffentlich an Dritte
+geht. Das Compliance-Gate ist hier durchlässig; der öffentliche Modus ist später ein
+einziger Schalter (`access.mode: public`).
+
 ## Schnellstart
 
 ```bash
@@ -69,14 +78,33 @@ python -m cassius run --mock
 
 # 3. Echter Lauf (braucht ANTHROPIC_API_KEY oder `ant auth login`)
 export ANTHROPIC_API_KEY="sk-ant-..."
-python -m cassius run
+python -m cassius run                 # einmalig, nur neue Artikel (Dedup)
 
-# 4. Ergebnis ansehen
-python -m http.server -d site 8000   # → http://localhost:8000
+# 4. Vollautomatik (läuft in Schleife)
+python -m cassius auto --interval 3600
+
+# 5. Privat ansehen (passwortgeschützt, nur lokal)
+export CASSIUS_PASSWORD="dein-passwort"
+python -m cassius serve --port 8000   # → http://localhost:8000 (Nutzer „cassius")
 ```
 
-Die Quellen konfigurierst du in `config/sources.yaml` (Sprache, Region, Feeds,
-Modell). Standard: gemischt DE/EN-international, `claude-opus-4-8`.
+- **Gedächtnis**: Cassius überspringt bereits analysierte Artikel und sammelt Muster,
+  die als *Kontext* (nie als Regel) in neue Analysen zurückfließen — siehe Seite „Gelernt".
+- **Konfiguration**: `config/sources.yaml` (Feeds, Sprache, Modell, Zugang, Automatik,
+  Gate). Standard-Modell: `claude-opus-4-8`.
+- **Privatsphäre**: Das Gedächtnis (`data/state/`) ist aus dem Repo ausgeschlossen —
+  reale Analysen landen nie im öffentlichen Repository.
+
+## ⚠️ Öffentliches Repo — Nutzung auf eigene Gefahr
+
+Dieses Repository ist öffentlich und der Code steht unter MIT (ohne Gewähr, ohne
+Haftung — siehe `LICENSE`). **Wer eine eigene Instanz betreibt, tut das auf eigene
+Verantwortung.** Sobald du Analysen *veröffentlichst* (Modus `public`, für Dritte
+erreichbar), bist du der **Betreiber** im Sinne von EU AI Act und DSGVO und trägst die
+Verantwortung für Kennzeichnung, Impressum/V.i.S.d.P. und die getätigten Aussagen. Lies
+vorher `docs/COMPLIANCE.md` und `docs/ETHICS.md`. Für den öffentlichen Betrieb mit
+Bezug auf benannte Personen ist ein einmaliger Blick eines Fachanwalts für Medienrecht
+dringend zu empfehlen.
 
 ---
 
@@ -94,10 +122,18 @@ cassius/
 │   ├── COMPLIANCE.md         · EU-AI-Act-Abbildung (der wichtige Teil)
 │   ├── ETHICS.md             · Leitplanken, Fehlbarkeit, rechtliche Linie
 │   └── PHILOSOPHY.md         · die Lore von Cassius (Fiktion)
-├── cassius/                  · die Pipeline (ingest · analyze · build)
+├── cassius/                  · die Pipeline
+│   ├── ingest.py             · Feeds einlesen (RSS)
+│   ├── analyze.py            · Claude + Persona (Structured Outputs)
+│   ├── store.py              · Gedächtnis: Archiv, Dedup, Muster-Lernen
+│   ├── gate.py               · Compliance-Gate (privat durchlässig / public scharf)
+│   ├── build_site.py         · statische Website (Jinja2)
+│   ├── serve.py              · passwortgeschütztes privates Ausliefern
+│   └── pipeline.py           · Orchestrierung + Vollautomatik
 ├── templates/                · Jinja2-HTML (mit Compliance-Kennzeichnung)
 ├── static/                   · CSS
-└── data/fixtures/            · Beispieldaten für den Mock-Modus
+├── data/fixtures/            · Beispieldaten für den Mock-Modus
+└── data/state/               · Gedächtnis zur Laufzeit (NICHT im Repo)
 ```
 
 ## Lizenz & Verantwortung
